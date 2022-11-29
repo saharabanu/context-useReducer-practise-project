@@ -39,7 +39,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-const uri = "mongodb+srv://DevZeroOne:DevZeroOne@cluster0.2kdey3p.mongodb.net/datas?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.2kdey3p.mongodb.net/?retryWrites=true&w=majority`;
 
 
 const client = new MongoClient(uri, {
