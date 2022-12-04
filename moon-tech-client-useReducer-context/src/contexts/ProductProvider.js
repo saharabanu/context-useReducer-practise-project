@@ -1,26 +1,27 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
-import { actionType, initialState } from '../states/productActionTypes';
-import { reducer } from '../states/productReducer';
-export const product_Context = createContext();
+import React, { createContext, useEffect, useReducer  } from 'react';
+
+import { productFetchingError, productFetchingStart, productFetchingSuccess } from '../states/productAction';
+import productReducer, { initialState } from '../states/productReducer';
+export const productContext = createContext();
 
 const ProductProvider = ({children}) => {
-    
-    const [state, dispatch] = useReducer(reducer, initialState);
-    // console.log(state);
-    useEffect(()=> {
-        dispatch({type: actionType.FETCHING_LOADING});
-      fetch("https://lit-coast-44901.herokuapp.com/spots")
-      .then(res=> res.json())
-      .then(data => dispatch({type: actionType.FETCHING_SUCCESS, payload: data}))
-      .catch(() => {
-        dispatch({type: actionType.FETCHING_ERROR})
-      })
+   
+    const [state, dispatch] = useReducer(productReducer, initialState);
+    console.log(state)
+
+    useEffect( () => {
+        dispatch(productFetchingStart)
+        fetch('./products.json')
+        .then(res => res.json())
+        .then(data => dispatch(productFetchingSuccess(data)))
+        .catch(err => dispatch(productFetchingError(err)))
     },[]);
-  
-    const value ={
-         state, dispatch
+
+    const value = {
+        state,
+        dispatch
     }
-  return <product_Context.Provider value={value}>{children}</product_Context.Provider>
+  return <productContext.Provider value={value}>{children}</productContext.Provider>
 }
 
-export default ProductProvider
+export default ProductProvider;

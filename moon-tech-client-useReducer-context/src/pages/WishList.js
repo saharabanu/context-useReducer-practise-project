@@ -1,13 +1,12 @@
-import React from "react";
-import ProductCard from "../components/ProductCard";
-import useProduct from "../contexts/hooks/useProduct";
+import React from 'react'
+import ProductCard from '../components/ProductCard';
+import useProduct from '../contexts/hooks/useProduct';
 
-
-const Home = () => {
+const WishList = () => {
   // state from useReducer 
   const {state} = useProduct();
   // distructuing from state 
-  const {products, loading, error} = state;
+  const {wishlist, loading, error} = state;
 
   let content;
 
@@ -19,12 +18,12 @@ const Home = () => {
     content = <p className="bg-red-500 text-white">Something went wrong.......</p>
     
   }
-  if (!loading && !error && products?.length === 0) {
+  if (!loading && !error && wishlist?.length === 0) {
     content = <p> There is no Product.......</p>
     
   }
-  if (!loading && !error && products?.length) {
-    content = products.map(product => <ProductCard key = {product._id} product={product}/>)
+  if (!loading && !error && wishlist?.length) {
+    content = wishlist.map(product => <ProductCard key = {product._id} product={product}/>)
     
   }
   
@@ -35,6 +34,6 @@ const Home = () => {
       {content}
     </div>
   );
-};
+}
 
-export default Home;
+export default WishList
