@@ -1,6 +1,9 @@
 // product action 
 
-import { ADD_TO_CART, FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, REMOVE_FROM_CART, WISHLIST } from "./actiontypes"
+import { ADD_TO_CART, FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, REMOVE_FROM_CART, WISHLIST } from "./actiontypes";
+
+
+
 
 
 // product fetching  start action function 
@@ -33,10 +36,10 @@ export const addToCart = (product) => {
 };
 
 
-export const removeFromCart = (id) => {
+export const removeFromCart = (product) => {
     return{
         type: REMOVE_FROM_CART,
-        payload: id,
+        payload: product,
     }
 };
 

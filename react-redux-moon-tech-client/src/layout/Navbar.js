@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillCartFill } from "react-icons/bs";
 import { IoIosListBox } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
+  const cart = useSelector(state => state.cart)
   
   return (
     <nav className='h-14 bg-indigo-200 rounded-full m-2 max-w-7xl mx-auto px-5'>
@@ -26,12 +28,13 @@ const Navbar = () => {
          
         </li>
         </Link>
-        <Link to='/cart'>
+        <Link to='/cart' className="relative">
         <li title='cart' className='bg-indigo-500 p-2 rounded-full'>
           
             <BsFillCartFill className='text-white ' />
             
         </li>
+        <p className="absolute top-0 right-0 text-white">{cart.length}</p>
         </Link>
 
         
