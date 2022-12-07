@@ -1,8 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import {useDispatch} from 'react-redux'
+import { addProductThunkFunc } from "../../redux/thunk/productsThunk/addProductThunkFunc";
 
 const AddProduct = () => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch()
 
   const submit = (data) => {
     const product = {
@@ -19,26 +22,27 @@ const AddProduct = () => {
       spec: [],
     };
 
-    console.log(product);
+    // console.log(product);
+    dispatch(addProductThunkFunc(product))
   };
 
   return (
     <div className='flex justify-center items-center h-full '>
       <form
-        className='shadow-lg p-10 rounded-md flex flex-wrap gap-3 max-w-3xl justify-between bg-white'
+        className='shadow-lg p-10 rounded-md flex flex-wrap gap-3 max-w-3xl justify-between '
         onSubmit={handleSubmit(submit)}
       >
-        <div className='flex flex-col w-full max-w-xs'>
+        <div className='flex flex-col w-full max-w-xs '>
           <label className='mb-2' htmlFor='model'>
             Model
           </label>
-          <input type='text' id='model' {...register("model")} />
+          <input type='text' id='model' name="model" {...register("model")} className=" py-3"/>
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='image'>
             Image
           </label>
-          <input type='text' name='image' id='image' {...register("image")} />
+          <input type='text' name='image' id='image' {...register("image")} className=" py-3"/>
         </div>
 
         <div className='flex flex-col w-full max-w-xs'>
@@ -52,9 +56,9 @@ const AddProduct = () => {
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='price'>
-            Image
+           Price
           </label>
-          <input type='text' name='price' id='price' {...register("price")} />
+          <input type='text' name='price' id='price' {...register("price")} className=" py-3"/>
         </div>
 
         <div className='flex flex-col w-full max-w-xs'>
@@ -95,7 +99,7 @@ const AddProduct = () => {
             name='keyFeature1'
             id='keyFeature1'
             {...register("keyFeature1")}
-          />
+            className=" py-3"/>
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature2'>
@@ -106,7 +110,7 @@ const AddProduct = () => {
             name='keyFeature2'
             id='keyFeature2'
             {...register("keyFeature2")}
-          />
+            className=" py-3"/>
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature3'>
@@ -117,7 +121,7 @@ const AddProduct = () => {
             name='keyFeature3'
             id='keyFeature3'
             {...register("keyFeature3")}
-          />
+            className=" py-3"/>
         </div>
         <div className='flex flex-col w-full max-w-xs'>
           <label className='mb-2' htmlFor='keyFeature4'>
@@ -128,7 +132,7 @@ const AddProduct = () => {
             name='keyFeature4'
             id='keyFeature4'
             {...register("keyFeature4")}
-          />
+            className=" py-3"/>
         </div>
 
         <div className='flex justify-between items-center w-full'>

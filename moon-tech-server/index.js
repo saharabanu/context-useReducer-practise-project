@@ -35,7 +35,7 @@ const run = async () => {
       const product = req.body;
 
       const result = await productCollection.insertOne(product);
-      // console.log(result);
+      // console.log(product);
 
       res.send(result);
     });

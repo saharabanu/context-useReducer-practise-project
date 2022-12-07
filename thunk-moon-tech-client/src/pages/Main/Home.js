@@ -39,10 +39,10 @@ const Home = () => {
      
    }
    if (!loading && !error && products?.length ) {
-     content = products.map(product => <ProductCard key = {product._id} product={product}/>)
+     content = products?.map(product => <ProductCard key = {product?._id} product={product}/>)
      
    }
-   if (!loading && !error && products.length && (stock || brands.length)) {
+   if (!loading && !error && products?.length && (stock || brands.length)) {
      content = products
      .filter((product) => {
       if(stock){
