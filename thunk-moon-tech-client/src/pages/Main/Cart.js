@@ -25,7 +25,7 @@ const Cart = () => {
      
    }
    if (!loading && !error && cart?.length) {
-     content = cart.sort((a ,b) => a._id - b._id).map(product => <ProductCard key = {product._id} product={product}/>)
+     content = cart.sort((a ,b) => a.cartPosition - b.cartPosition).map(product => <ProductCard key = {product._id} product={product}/>)
      
    }
    

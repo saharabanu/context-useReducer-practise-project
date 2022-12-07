@@ -15,10 +15,10 @@ export const productFetchingStart = () => {
     }
 };
 // product fetching  success action function 
-export const productFetchingSuccess = (products) => {
+export const productFetchingSuccess = (data) => {
     return{
         type: FETCHING_SUCCESS,
-        payload: products
+        payload: data
     }
 };
 
