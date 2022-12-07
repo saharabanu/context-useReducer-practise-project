@@ -1,9 +1,11 @@
 import { ADD_TO_CART, FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, REMOVE_FROM_CART, WISHLIST } from "./actiontypes";
-import { initialState } from "./initialState";
+import { productInitialState } from "./productInitialState";
 
 
 
-const productReducer = (state= initialState, action) => {
+
+
+const productReducer = (state = productInitialState, action) => {
 
    const selectedProduct = state.cart.find(product => product._id === action.payload._id);
 
