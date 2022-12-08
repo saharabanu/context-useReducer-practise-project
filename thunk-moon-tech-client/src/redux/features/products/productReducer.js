@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_TO_CART, FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, REMOVE_FROM_CART, REMOVE_PRODUCT, WISHLIST } from "./actiontypes";
+import { ADD_PRODUCT, ADD_TO_CART, EDIT_PRODUCT, FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, REMOVE_FROM_CART, REMOVE_PRODUCT, WISHLIST } from "./actiontypes";
 import { productInitialState } from "./productInitialState";
 
 
@@ -35,6 +35,21 @@ const productReducer = (state = productInitialState, action) => {
             return {
                 ...state,
                 products: [...state.products, action.payload],
+                
+            };
+            // Edit product  
+        case EDIT_PRODUCT:
+            return {
+                ...state,
+                products: state.products.map(product => {
+                    if(product._id !== action.payload.id){
+                        return product;
+                    }
+                    return{
+                        ...state,
+                        products: action.payload.id
+                    }
+                }),
                 
             };
             // Remove product  

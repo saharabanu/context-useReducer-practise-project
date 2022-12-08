@@ -46,6 +46,28 @@ const run = async () => {
       const result = await productCollection.deleteOne({ _id: ObjectId(id) });
       res.send(result);
     });
+    app.put("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedProduct = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          model: updatedProduct.model,
+          image: updatedProduct.image,
+          status: updatedProduct.status,
+          keyFeature: updatedProduct.keyFeature,
+          price: updatedProduct.price,
+          rating: updatedProduct.rating,
+          spec: updatedProduct.spec,
+          
+        },
+      };
+
+      const result = await productCollection.updateOne(filter, updateDoc, options);
+      console.log(result);
+      res.send(result);
+    });
   } finally {
   }
 };

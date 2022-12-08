@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { editProductThunkFunc } from "../../redux/thunk/productsThunk/editProductThunkFunc";
 import { fetchProducts } from "../../redux/thunk/productsThunk/fetchProducts";
 import { removeProductThunkFunc } from "../../redux/thunk/productsThunk/removeProductThunkFunc";
+import EditProductForm from "../modal/EditProductForm";
+
 
 const ProductList = () => {
-  // const [products, setProducts] = useState([]);
- 
-  const {products} = useSelector(state => state.products);
+  const products = useSelector(state => state.products.products);
+  const [editData, setEditData] = useState({});
   const dispatch = useDispatch();
+  const [editMode, setEditMode] = useState(false);
+  
+  // toogle gfun   => {
 
+  const editToggle = (data) => {
+    setEditData(data);
+    setEditMode(true);
+  }
+
+  // get all product useEffect 
  useEffect( () => {
    dispatch(fetchProducts())
- },[dispatch])
+ },[dispatch, editMode]);
+
+
+
 
   return (
     <div className='flex flex-col justify-center items-center h-full w-full '>
@@ -42,22 +56,27 @@ const ProductList = () => {
                 </th>
               </tr>
             </thead>
-
+            
+            {editMode && (<div className="absolute m-0 p-0 w-1/3">
+            <EditProductForm setEditMode={setEditMode}   data={editData}/>
+          </div>)}
+        
             <tbody className='text-sm divide-y divide-gray-100'>
-              {products.map(({ model, brand, price, status, _id }) => (
-                <tr key={_id}>
+              {products.map((item) => (
+                <tr key={item._id}>
+                
                   <td className='p-2'>
                     <input type='checkbox' className='w-5 h-5' value='id-1' />
                   </td>
                   <td className='p-2'>
-                    <div className='font-medium text-gray-800'>{model}</div>
+                    <div className='font-medium text-gray-800'>{item.model}</div>
                   </td>
                   <td className='p-2'>
-                    <div className='text-left capitalize'>{brand}</div>
+                    <div className='text-left capitalize'>{item.brand}</div>
                   </td>
                   <td className='p-2'>
                     <div className='text-left'>
-                      {status ? (
+                      {item.status ? (
                         <p className='text-green-500 font-medium'>Available</p>
                       ) : (
                         <p className='text-red-500 font-medium'>Stock out</p>
@@ -66,12 +85,13 @@ const ProductList = () => {
                   </td>
                   <td className='p-2'>
                     <div className='text-left font-medium text-indigo-500'>
-                      {price}
+                      {item.price}
                     </div>
                   </td>
+                  
                   <td className='p-2'>
                     <div className='flex justify-center'>
-                      <button onClick={() => dispatch(removeProductThunkFunc(_id))}>
+                      <button onClick={() => dispatch(removeProductThunkFunc(item._id))}>
                         <svg
                           className='w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1'
                           fill='none'
@@ -87,6 +107,7 @@ const ProductList = () => {
                           ></path>
                         </svg>
                       </button>
+                      <button onClick={() => editToggle(item)} className="pl-3 font-bold">Edit</button>
                     </div>
                   </td>
                 </tr>

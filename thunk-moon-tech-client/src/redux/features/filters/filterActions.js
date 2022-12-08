@@ -1,4 +1,4 @@
-import { TOGGLE_BRAND, TOGGLE_STOCK } from "./filterActionTypes"
+import { CLEAR_FILTER, TOGGLE_BRAND, TOGGLE_STOCK } from "./filterActionTypes"
 
 
 
@@ -15,6 +15,13 @@ export const toggledBrand = (brand) => {
 export const toggledStock = () => {
     return{
         type: TOGGLE_STOCK,
+        
+    }
+};
+//  stock toggled action 
+export const clearFilter = () => {
+    return{
+        type: CLEAR_FILTER,
         
     }
 };

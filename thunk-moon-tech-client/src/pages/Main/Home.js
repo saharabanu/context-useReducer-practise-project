@@ -1,7 +1,7 @@
 import React ,{useEffect} from "react";
 import ProductCard from "../../components/ProductCard";
 import {useDispatch, useSelector} from 'react-redux'
-import { toggledBrand, toggledStock } from "../../redux/features/filters/filterActions";
+import { clearFilter, toggledBrand, toggledStock } from "../../redux/features/filters/filterActions";
 import { fetchProducts } from "../../redux/thunk/productsThunk/fetchProducts";
 
 
@@ -75,6 +75,9 @@ const Home = () => {
         </button>
         <button className={`border px-3 py-2 rounded-full font-semibold ${brands.includes('intel') && activeClass}`} onClick={() => dispatch(toggledBrand("intel"))}>
           Intel
+        </button>
+        <button className={`border px-3 py-2 rounded-full font-semibold activeClass`} onClick={() => dispatch(clearFilter())}>
+          Clear All
         </button>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14'>

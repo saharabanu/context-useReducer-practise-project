@@ -1,4 +1,4 @@
-import { TOGGLE_BRAND, TOGGLE_STOCK } from "./filterActionTypes";
+import { CLEAR_FILTER, TOGGLE_BRAND, TOGGLE_STOCK } from "./filterActionTypes";
 import { filterInitialState } from "./filterInitialState";
 
 
@@ -40,6 +40,21 @@ const filterReducer = (state = filterInitialState, action) => {
                     ...state.filters,
                     stock: !state.filters.stock
                 }
+
+            };
+            // clear filter reducer function 
+
+        case CLEAR_FILTER:
+            return{
+                ...state,
+                filters:{
+                    brands:[],
+                    stock:false,
+                },
+                all_products: state.all_products,
+                keyword: ""
+                
+                
 
             };
             
